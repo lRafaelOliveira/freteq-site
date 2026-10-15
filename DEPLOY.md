@@ -91,10 +91,16 @@ Sem isso, calculadora e rastreio falham no browser.
 Coolify → Application do **backend** → Environment → `FRONTEND_URL`:
 
 ```env
-FRONTEND_URL=https://app.freteq.com.br,https://freteq.com.br,https://www.freteq.com.br
+FRONTEND_URL=https://app.freteq.com.br,https://freteq.com.br,https://www.freteq.com.br,http://ustqvbfjj7tahxmylaogwilm.179.199.130.225.sslip.io
 ```
 
-O **primeiro** item continua sendo a URL do painel. Redeploy do backend depois de salvar.
+Regras:
+- Só **origem** (scheme + host), sem path (`/calcular-frete/` não entra).
+- O **primeiro** item continua sendo a URL do painel (`app.freteq.com.br`).
+- Inclua `http://` ou `https://` exatamente como o browser usa (sslip.io do Coolify costuma ser `http://` até o SSL do domínio próprio).
+- Quando o site estiver só em `https://freteq.com.br`, pode remover o host sslip.io.
+
+Redeploy do **backend** depois de salvar.
 
 ---
 
