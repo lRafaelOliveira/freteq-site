@@ -47,14 +47,14 @@ FRONTEND_URL=https://app.freteq.com.br,https://freteq.com.br,https://www.freteq.
 
 O primeiro item continua sendo a URL do painel (`frontendUrl` no código).
 
-## Deploy (Coolify / Docker)
+## Deploy (Coolify)
+
+Passo a passo completo: **[DEPLOY.md](DEPLOY.md)** (Dockerfile no Coolify ou GHCR + webhook).
 
 ```bash
 docker build -t freteq-site .
 docker run --rm -p 8080:80 freteq-site
 ```
-
-Aponte o domínio `freteq.com.br` (e `www`) para este container. SSL via proxy do Coolify/Nginx.
 
 ## SEO (pós-deploy)
 
