@@ -1,0 +1,23 @@
+{
+  "name": "freteq-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site institucional FreteQ (freteq.com.br) — HTML/CSS/JS estático",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "pages": "node scripts/generate-pages.mjs",
+    "build:css": "tailwindcss -i src/styles.css -o public/assets/css/styles.css --minify",
+    "build": "npm run pages && npm run build:css",
+    "images": "node scripts/optimize-images.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "sharp": "^0.34.0",
+    "tailwindcss": "^4.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

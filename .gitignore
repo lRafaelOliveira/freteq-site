@@ -1,0 +1,7 @@
+node_modules/
+.originals/
+public/assets/css/
+.tmp-lighthouse.json
+*.log
+.DS_Store
+.env
