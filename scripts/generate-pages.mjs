@@ -24,6 +24,10 @@ const faqItems = [
     a: 'Não enviamos produtos perigosos, inflamáveis, armas, animais vivos ou dinheiro. Consulte a lista completa na unidade de Taguatinga Norte.',
   },
   {
+    q: 'Onde eu despacho a encomenda?',
+    a: 'Cada transportadora tem o próprio ponto de coleta. Informe seu CEP em Pontos de Coleta para ver o LoggiPonto, a unidade J&T ou a central FreteQ mais perto. Depois de pagar e imprimir a etiqueta, leve o pacote no ponto e acompanhe o rastreio.',
+  },
+  {
     q: 'Minha encomenda tem seguro?',
     a: 'Sim, todos os envios possuem seguro básico baseado no valor declarado no momento da cotação e emissão da etiqueta.',
   },
@@ -49,7 +53,7 @@ async function writeIndex() {
   const html = `${head({
     title: 'FreteQ — Frete Barato e Envio de Encomendas em Brasília',
     description:
-      'Calcule frete barato em Brasília, emita etiqueta online e despache na unidade FreteQ em Taguatinga Norte. Correios, Loggi, J&T, Latam e mais.',
+      'Calcule frete barato em Brasília, emita etiqueta online e despache na unidade FreteQ em Taguatinga Norte. Loggi, J&T e Latam Cargo.',
     path: '/',
     jsonLd: [localBusinessLd(), organizationLd(), websiteLd(), faqLd()],
   })}
@@ -82,7 +86,7 @@ ${header({ active: 'home' })}
         ${[
           ['1', 'Simule Online', 'Acesse nossa calculadora e compare transportadoras instantaneamente.'],
           ['2', 'Pague e Imprima', 'Pague com segurança e gere sua etiqueta de envio em segundos.'],
-          ['3', 'Leve na Unidade', 'Despache na nossa unidade parceira em Brasília sem enfrentar filas.'],
+          ['3', 'Leve no ponto', 'Despache no ponto de coleta da transportadora mais perto de você. <a href="#pontos" class="font-bold text-gray-900 underline underline-offset-2">Ver pontos</a>'],
           ['4', 'Rastreie', 'Acompanhe sua encomenda passo a passo até o destino final.'],
         ]
           .map(
@@ -112,13 +116,13 @@ ${header({ active: 'home' })}
         </div>
         <div class="bg-gray-50 p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition">
           <div class="bg-black text-yellow-400 w-14 h-14 flex items-center justify-center rounded-2xl mb-6 shadow-md">${svg.mapPin()}</div>
-          <h3 class="text-xl font-bold mb-3 text-gray-900">Unidades Físicas</h3>
-          <p class="text-gray-600 leading-relaxed">Pontos estratégicos para sua total conveniência na hora de despachar.</p>
+          <h3 class="text-xl font-bold mb-3 text-gray-900">Pontos de Coleta</h3>
+          <p class="text-gray-600 leading-relaxed">Loggi, J&amp;T e Latam Cargo têm pontos perto de você. Informe o CEP e encontre o mais próximo. <a href="#pontos" class="font-bold text-gray-900 underline underline-offset-2">Ver pontos</a></p>
         </div>
         <div class="bg-gray-50 p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition">
           <div class="bg-yellow-400 text-black w-14 h-14 flex items-center justify-center rounded-2xl mb-6 shadow-md">${svg.truck()}</div>
           <h3 class="text-xl font-bold mb-3 text-gray-900">Grandes Parceiros</h3>
-          <p class="text-gray-600 leading-relaxed">Trabalhamos com Correios, Loggi, J&amp;T, Latam e muito mais.</p>
+          <p class="text-gray-600 leading-relaxed">Trabalhamos com Loggi, J&amp;T e Latam Cargo.</p>
         </div>
         <div class="bg-gray-50 p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition">
           <div class="bg-black text-yellow-400 w-14 h-14 flex items-center justify-center rounded-2xl mb-6 shadow-md">${svg.packageCheck()}</div>
@@ -138,7 +142,7 @@ ${header({ active: 'home' })}
           <p class="text-base md:text-lg text-gray-600 mb-8 leading-relaxed">Nossa equipe busca as melhores rotas e preços para que sua única preocupação seja o sucesso do seu negócio.</p>
           <div class="grid grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <div><p class="text-3xl md:text-4xl font-black text-yellow-500 mb-1">+1000</p><p class="text-gray-600 font-bold uppercase text-xs md:text-sm">Clientes Atendidos</p></div>
-            <div><p class="text-3xl md:text-4xl font-black text-yellow-500 mb-1">07+</p><p class="text-gray-600 font-bold uppercase text-xs md:text-sm">Transportadoras</p></div>
+            <div><p class="text-3xl md:text-4xl font-black text-yellow-500 mb-1">03</p><p class="text-gray-600 font-bold uppercase text-xs md:text-sm">Transportadoras</p></div>
           </div>
         </div>
         <div class="order-1 lg:order-2 relative">
@@ -230,11 +234,8 @@ ${header({ active: 'home' })}
     <div class="container mx-auto px-6 text-center">
       <h2 class="text-2xl md:text-3xl font-black text-gray-900 mb-10 md:mb-16 uppercase tracking-wide">Melhores Transportadoras do Brasil</h2>
       <div class="flex flex-wrap justify-center items-center gap-8 md:gap-14 grayscale opacity-50 hover:grayscale-0 transition-all duration-500">
-        <img src="/assets/img/correios.webp" alt="Logo Correios — postagem de encomendas" width="112" height="112" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
         <img src="/assets/img/loggi.webp" alt="Logo Loggi — entregas rápidas em Brasília" width="226" height="74" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
-        <img src="/assets/img/total-express.webp" alt="Logo Total Express" width="295" height="112" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
         <img src="/assets/img/jt-express.webp" alt="Logo J&amp;T Express Brasília" width="112" height="112" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
-        <img src="/assets/img/braspress.webp" alt="Logo Braspress" width="178" height="29" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
         <img src="/assets/img/latam.webp" alt="Logo Latam Cargo" width="289" height="90" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
       </div>
     </div>
@@ -242,21 +243,39 @@ ${header({ active: 'home' })}
 
   ${whatsappCard()}
 
-  <section id="lojas" class="py-16 md:py-24 bg-yellow-400 text-black">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl md:text-5xl font-black uppercase mb-10 md:mb-12 tracking-tight">Nossa Unidade</h2>
-      <div class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl">
-        <div class="flex flex-col items-center gap-6">
-          <div class="bg-yellow-100 text-yellow-600 w-20 h-20 rounded-full flex items-center justify-center shadow-inner">${svg.mapPin('w-10 h-10')}</div>
-          <div class="space-y-2">
-            <p class="text-xl md:text-2xl font-black text-gray-900 leading-tight">QNG 27 LOTE 02 - LOJA 03</p>
-            <p class="text-lg md:text-xl text-gray-600 font-medium">TAGUATINGA NORTE - DF, 72130-370</p>
+  <section id="pontos" class="py-16 md:py-24 bg-yellow-400 text-black">
+    <div class="container mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+        <h2 class="text-3xl md:text-5xl font-black uppercase mb-4 tracking-tight">Pontos de Coleta</h2>
+        <p class="text-base md:text-xl font-medium">Pague, imprima a etiqueta e leve no ponto da transportadora mais perto de você. Depois é só acompanhar o rastreio.</p>
+      </div>
+
+      <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-2xl mb-8">
+        <form id="pontos-form" class="flex flex-col sm:flex-row gap-3 sm:items-end">
+          <div class="flex-1 w-full">
+            <label for="pontos-cep" class="block text-xs font-black text-gray-500 mb-2 uppercase tracking-widest">Seu CEP</label>
+            <input type="text" id="pontos-cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="Ex: 72130-370" maxlength="9" required class="w-full p-4 border-2 border-gray-100 rounded-xl focus:border-yellow-400 outline-none transition bg-gray-50 text-gray-900">
           </div>
-          <div class="bg-gray-50 border border-gray-100 py-3 px-6 rounded-xl w-full">
-            <p class="text-sm md:text-base font-bold text-gray-600 uppercase tracking-widest">${svg.clock()}Horário de Funcionamento</p>
-            <p class="text-gray-900 font-medium mt-1">Seg à Sex: 08h - 18h | Sáb: 09h - 13h</p>
-          </div>
-          <a href="${MAPS}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-black text-white px-10 py-4 rounded-xl font-black hover:bg-gray-800 transition shadow-xl mt-2 text-lg">ABRIR NO MAPA</a>
+          <button type="submit" id="pontos-submit" class="w-full sm:w-auto bg-black text-white px-8 py-4 rounded-xl font-black hover:bg-gray-800 transition shadow-xl text-lg">Buscar pontos</button>
+        </form>
+        <p class="text-sm text-gray-500 mt-3">Mostramos os pontos Loggi e J&amp;T mais próximos. Latam Cargo despacha na unidade FreteQ.</p>
+      </div>
+
+      <div id="pontos-results" class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <article class="bg-white p-6 rounded-3xl shadow-xl text-left">
+            <p class="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">Central FreteQ · Latam Cargo</p>
+            <h3 class="text-xl font-black text-gray-900 mb-2">Unidade Taguatinga Norte</h3>
+            <p class="text-gray-600 font-medium mb-4">QNG 27 Lote 02 Loja 03<br>Taguatinga Norte - DF, 72130-370</p>
+            <p class="text-sm text-gray-500 mb-5">${svg.clock()}Seg à Sex: 08h - 18h | Sáb: 09h - 13h</p>
+            <a href="${MAPS}" target="_blank" rel="noopener noreferrer" class="inline-flex w-full justify-center bg-black text-white px-6 py-3 rounded-xl font-black hover:bg-gray-800 transition">Abrir no mapa</a>
+          </article>
+          <article class="bg-white/70 p-6 rounded-3xl border-2 border-dashed border-black/10 flex items-center justify-center text-center min-h-48">
+            <p class="text-gray-700 font-medium">Informe o CEP para ver os <strong>LoggiPontos</strong> mais perto de você.</p>
+          </article>
+          <article class="bg-white/70 p-6 rounded-3xl border-2 border-dashed border-black/10 flex items-center justify-center text-center min-h-48">
+            <p class="text-gray-700 font-medium">Informe o CEP para ver as unidades <strong>J&amp;T</strong> mais perto de você.</p>
+          </article>
         </div>
       </div>
     </div>
@@ -264,6 +283,7 @@ ${header({ active: 'home' })}
 </main>
 ${footer()}
 <script type="module" src="/js/main.js"></script>
+<script type="module" src="/js/pontos.js"></script>
 </body>
 </html>`
   await writeFile(join(PUBLIC, 'index.html'), html)
@@ -275,7 +295,7 @@ async function writeQuote() {
   const html = `${head({
     title: 'Calcular Frete Online em Brasília | FreteQ',
     description:
-      'Simule frete barato em Brasília: compare Correios, Loggi, J&T, Latam e mais em segundos. Cotação online FreteQ com preços e prazos reais.',
+      'Simule frete barato em Brasília: compare Loggi, J&T e Latam Cargo em segundos. Cotação online FreteQ com preços e prazos reais.',
     path: '/calcular-frete/',
     jsonLd: [
       breadcrumbLd([

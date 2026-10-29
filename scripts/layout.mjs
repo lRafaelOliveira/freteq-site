@@ -57,6 +57,7 @@ export function header({ active = 'home' } = {}) {
     <div class="hidden lg:flex items-center space-x-8">
       ${link('/#servicos', 'Serviços', 'servicos')}
       ${link('/#como-funciona', 'Como Funciona', 'como')}
+      ${link('/#pontos', 'Pontos', 'pontos')}
       ${link('/#sobre-nos', 'Sobre Nós', 'sobre')}
       ${link('/calcular-frete/', 'Calcular Frete', 'calcular')}
       ${link('/rastreamento/', 'Rastrear', 'rastrear')}
@@ -73,6 +74,7 @@ export function header({ active = 'home' } = {}) {
   <div id="mobile-menu" class="hidden lg:hidden bg-white px-6 pb-4 border-t border-yellow-500">
     <a href="/#servicos" class="block py-2 text-gray-600 hover:text-yellow-500">Serviços</a>
     <a href="/#como-funciona" class="block py-2 text-gray-600 hover:text-yellow-500">Como Funciona</a>
+    <a href="/#pontos" class="block py-2 text-gray-600 hover:text-yellow-500">Pontos de Coleta</a>
     <a href="/#sobre-nos" class="block py-2 text-gray-600 hover:text-yellow-500">Sobre Nós</a>
     <a href="/calcular-frete/" class="block py-2 text-gray-600 hover:text-yellow-500">Calcular Frete</a>
     <a href="/rastreamento/" class="block py-2 text-gray-600 hover:text-yellow-500">Rastrear</a>
@@ -97,6 +99,7 @@ export function footer() {
         <h3 class="text-white font-bold mb-4 uppercase tracking-widest text-sm">Acesso Rápido</h3>
         <ul class="space-y-2 text-gray-400">
           <li><a href="/#servicos" class="hover:text-yellow-400 transition">Vantagens</a></li>
+          <li><a href="/#pontos" class="hover:text-yellow-400 transition">Pontos de Coleta</a></li>
           <li><a href="/calcular-frete/" class="hover:text-yellow-400 transition">Calcular Frete</a></li>
           <li><a href="/rastreamento/" class="hover:text-yellow-400 transition">Rastrear Pedido</a></li>
           <li><a href="${APP}/cadastro" class="hover:text-yellow-400 transition">Seja Parceiro</a></li>
@@ -149,7 +152,7 @@ export function localBusinessLd() {
     '@id': `${SITE}/#business`,
     name: 'FreteQ',
     alternateName: 'FreteQ Logística',
-    description: 'Agência de envios e frete barato em Brasília. Compare Correios, Loggi, J&T, Latam e mais. Cotação online, etiqueta e despacho em Taguatinga Norte.',
+    description: 'Agência de envios e frete barato em Brasília. Compare Loggi, J&T e Latam Cargo. Cotação online, etiqueta e despacho em Taguatinga Norte.',
     url: SITE,
     telephone: '+55-61-99134-4563',
     email: 'contato@freteq.com.br',
