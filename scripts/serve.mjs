@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = fileURLToPath(new URL('../public', import.meta.url))
 const PORT = Number(process.env.PORT ?? 4321)
+const API_PROXY = (process.env.API_PROXY ?? 'https://backend.freteq.com.br').replace(/\/+$/, '')
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -43,8 +44,36 @@ async function resolveFile(urlPath) {
   }
 }
 
+async function proxyPublicApi(req, res) {
+  const target = `${API_PROXY}${req.url ?? '/'}`
+  const chunks = []
+  for await (const chunk of req) chunks.push(chunk)
+  const method = req.method ?? 'GET'
+  const headers = { Accept: req.headers.accept ?? 'application/json' }
+  if (req.headers['content-type']) headers['Content-Type'] = req.headers['content-type']
+  const proxied = await fetch(target, {
+    method,
+    headers,
+    body: method === 'GET' || method === 'HEAD' ? undefined : Buffer.concat(chunks),
+  })
+  const body = Buffer.from(await proxied.arrayBuffer())
+  const contentType = proxied.headers.get('content-type') ?? 'application/json'
+  res.writeHead(proxied.status, { 'Content-Type': contentType })
+  res.end(body)
+}
+
 createServer(async (req, res) => {
   const urlPath = new URL(req.url ?? '/', 'http://localhost').pathname
+  if (urlPath.startsWith('/public/')) {
+    try {
+      await proxyPublicApi(req, res)
+    } catch (err) {
+      res.writeHead(502, { 'Content-Type': 'application/json' })
+      res.end(JSON.stringify({ error: { message: 'Falha ao consultar a API.' } }))
+      console.error('API proxy failed:', err)
+    }
+    return
+  }
   const redirect = LEGACY_REDIRECTS[urlPath]
   if (redirect) {
     res.writeHead(301, { Location: redirect })

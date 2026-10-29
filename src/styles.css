@@ -19,9 +19,14 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5.75rem;
   }
   body {
     font-family: var(--font-sans);
+  }
+  section[id],
+  footer[id] {
+    scroll-margin-top: 5.75rem;
   }
 }
 

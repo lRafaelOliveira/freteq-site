@@ -82,7 +82,8 @@ function displayResults(payload) {
 
 async function onSubmit(event) {
   event.preventDefault()
-  const code = document.getElementById('tracking-code').value.trim()
+  const code = document.getElementById('tracking-code').value.replace(/\s+/g, '').trim()
+  document.getElementById('tracking-code').value = code
   if (!code) return
   showLoader()
 
@@ -113,7 +114,7 @@ async function onSubmit(event) {
 if (form) {
   form.addEventListener('submit', onSubmit)
   const params = new URLSearchParams(window.location.search)
-  const code = params.get('codigo') || params.get('code')
+  const code = (params.get('codigo') || params.get('code') || '').replace(/\s+/g, '').trim()
   if (code) {
     document.getElementById('tracking-code').value = code
     form.requestSubmit()

@@ -55,16 +55,15 @@ export function header({ active = 'home' } = {}) {
       <img src="/assets/img/logo-freteq-256.webp" srcset="/assets/img/logo-freteq-256.webp 256w, /assets/img/logo-freteq-512.webp 512w" sizes="(max-width:768px) 120px, 168px" width="168" height="82" alt="FreteQ — logística e envio de encomendas em Brasília" class="h-10 md:h-14 w-auto">
     </a>
     <div class="hidden lg:flex items-center space-x-8">
-      ${link('/#servicos', 'Serviços', 'servicos')}
       ${link('/#como-funciona', 'Como Funciona', 'como')}
-      ${link('/#pontos', 'Pontos', 'pontos')}
+      ${link('/#servicos', 'Vantagens', 'servicos')}
       ${link('/#sobre-nos', 'Sobre Nós', 'sobre')}
+      ${link('/#pontos', 'Pontos', 'pontos')}
       ${link('/calcular-frete/', 'Calcular Frete', 'calcular')}
       ${link('/rastreamento/', 'Rastrear', 'rastrear')}
       ${link(`${APP}/cadastro`, 'Seja Parceiro', 'parceiro')}
     </div>
     <div class="hidden lg:flex items-center space-x-4">
-      <a href="${APP}/financeiro/recarga" class="bg-black text-yellow-400 font-bold px-6 py-2.5 rounded-lg hover:bg-gray-900 transition">Crédito</a>
       <a href="${APP}/login" class="bg-white text-black font-bold px-6 py-2.5 rounded-lg border-2 border-black hover:bg-gray-100 transition">Painel</a>
     </div>
     <button id="mobile-menu-button" type="button" class="lg:hidden p-2 text-black" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu">
@@ -72,14 +71,13 @@ export function header({ active = 'home' } = {}) {
     </button>
   </nav>
   <div id="mobile-menu" class="hidden lg:hidden bg-white px-6 pb-4 border-t border-yellow-500">
-    <a href="/#servicos" class="block py-2 text-gray-600 hover:text-yellow-500">Serviços</a>
     <a href="/#como-funciona" class="block py-2 text-gray-600 hover:text-yellow-500">Como Funciona</a>
-    <a href="/#pontos" class="block py-2 text-gray-600 hover:text-yellow-500">Pontos de Coleta</a>
+    <a href="/#servicos" class="block py-2 text-gray-600 hover:text-yellow-500">Vantagens</a>
     <a href="/#sobre-nos" class="block py-2 text-gray-600 hover:text-yellow-500">Sobre Nós</a>
+    <a href="/#pontos" class="block py-2 text-gray-600 hover:text-yellow-500">Pontos de Coleta</a>
     <a href="/calcular-frete/" class="block py-2 text-gray-600 hover:text-yellow-500">Calcular Frete</a>
     <a href="/rastreamento/" class="block py-2 text-gray-600 hover:text-yellow-500">Rastrear</a>
     <a href="${APP}/login" class="block py-2 text-gray-600 hover:text-yellow-500">Acessar Painel</a>
-    <a href="${APP}/financeiro/recarga" class="block py-2 text-gray-600 hover:text-yellow-500">Inserir crédito</a>
     <a href="${APP}/cadastro" class="block py-2 text-gray-600 hover:text-yellow-500">Seja Parceiro</a>
     <a href="/#contato" class="block mt-4 w-full text-center bg-yellow-400 text-black font-semibold px-5 py-2 rounded-lg hover:bg-yellow-500">Contato</a>
   </div>
