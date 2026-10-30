@@ -3,7 +3,6 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   APP,
-  MAPS,
   WA,
   breadcrumbLd,
   footer,
@@ -21,11 +20,11 @@ const PUBLIC = fileURLToPath(new URL('../public', import.meta.url))
 const faqItems = [
   {
     q: 'Quais itens não posso enviar?',
-    a: 'Não enviamos produtos perigosos, inflamáveis, armas, animais vivos ou dinheiro. Consulte a lista completa na unidade de Taguatinga Norte.',
+    a: 'Não enviamos produtos perigosos, inflamáveis, armas, animais vivos ou dinheiro. Consulte a lista completa com o atendimento FreteQ.',
   },
   {
     q: 'Onde eu despacho a encomenda?',
-    a: 'Cada transportadora tem o próprio ponto de coleta. Informe seu CEP em Pontos de Coleta para ver o LoggiPonto, a unidade J&T ou a central FreteQ mais perto. Depois de pagar e imprimir a etiqueta, leve o pacote no ponto e acompanhe o rastreio.',
+    a: 'Cada transportadora tem o próprio ponto de coleta. Informe seu CEP em Pontos de Coleta para ver o LoggiPonto ou a unidade J&T mais perto. Depois de pagar e imprimir a etiqueta, leve o pacote no ponto e acompanhe o rastreio.',
   },
   {
     q: 'Minha encomenda tem seguro?',
@@ -51,9 +50,9 @@ function faqLd() {
 
 async function writeIndex() {
   const html = `${head({
-    title: 'FreteQ — Frete Barato e Envio de Encomendas em Brasília',
+    title: 'FreteQ — Frete para e-commerce em todo o Brasil',
     description:
-      'Calcule frete barato em Brasília, emita etiqueta online e despache na unidade FreteQ em Taguatinga Norte. Loggi, J&T e Latam Cargo.',
+      'Plataforma nacional de frete para e-commerce. Compare Loggi, J&T e Latam Cargo, emita etiqueta e despache no ponto mais perto de você.',
     path: '/',
     jsonLd: [localBusinessLd(), organizationLd(), websiteLd(), faqLd()],
   })}
@@ -64,12 +63,12 @@ ${header({ active: 'home' })}
     <picture>
       <source media="(max-width: 767px)" srcset="/assets/img/hero-freteq-mobile.webp" type="image/webp">
       <source media="(min-width: 768px)" srcset="/assets/img/hero-freteq-768.webp 768w, /assets/img/hero-freteq-1280.webp 1280w, /assets/img/hero-freteq-1920.webp 1920w" sizes="100vw" type="image/webp">
-      <img src="/assets/img/hero-freteq-1280.webp" alt="Armazém automatizado FreteQ — logística inteligente para envio de encomendas em Brasília" width="1920" height="659" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover">
+      <img src="/assets/img/hero-freteq-1280.webp" alt="Armazém automatizado FreteQ — logística inteligente para e-commerce em todo o Brasil" width="1920" height="659" fetchpriority="high" decoding="async" class="absolute inset-0 w-full h-full object-cover">
     </picture>
     <div class="absolute inset-0 bg-black/70" aria-hidden="true"></div>
     <div class="relative container mx-auto px-6 py-20 md:py-32 lg:py-40 text-center">
       <h1 id="hero-title" class="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 uppercase tracking-tight">Envie suas encomendas com mais economia e praticidade.</h1>
-      <p class="text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 md:mb-12">Compare os preços das melhores transportadoras e garanta o frete mais barato de Brasília.</p>
+      <p class="text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 md:mb-12">O seu e-commerce merece o melhor frete, o melhor atendimento e a melhor solução.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4 px-4 sm:px-0">
         <a href="/calcular-frete/" class="bg-yellow-400 text-black font-black px-8 py-4 rounded-xl text-lg md:text-xl hover:bg-yellow-300 transition transform hover:scale-105 shadow-xl w-full sm:w-auto">CALCULAR FRETE AGORA</a>
       </div>
@@ -106,7 +105,7 @@ ${header({ active: 'home' })}
     <div class="container mx-auto px-6">
       <div class="text-center mb-10 md:mb-16">
         <h2 class="text-3xl md:text-5xl font-black text-gray-900 uppercase">Vantagens Exclusivas</h2>
-        <p class="text-gray-600 mt-3 md:text-lg">Logística inteligente para você e sua empresa.</p>
+        <p class="text-gray-600 mt-3 md:text-lg">Logística inteligente para o seu e-commerce em todo o Brasil.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         <div class="bg-gray-50 p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition">
@@ -137,9 +136,9 @@ ${header({ active: 'home' })}
     <div class="container mx-auto px-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div class="order-2 lg:order-1">
-          <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-6 uppercase tracking-tight">Brasília conectada ao Brasil</h2>
-          <p class="text-base md:text-lg text-gray-600 mb-4 leading-relaxed">A FreteQ nasceu com a missão de simplificar a logística para empreendedores e para todos que precisam enviar encomendas. Entendemos a dinâmica da capital e oferecemos soluções que combinam tecnologia de ponta com um atendimento humano.</p>
-          <p class="text-base md:text-lg text-gray-600 mb-8 leading-relaxed">Nossa equipe busca as melhores rotas e preços para que sua única preocupação seja o sucesso do seu negócio.</p>
+          <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-6 uppercase tracking-tight">O seu e-commerce conectado ao Brasil</h2>
+          <p class="text-base md:text-lg text-gray-600 mb-4 leading-relaxed">A FreteQ é a plataforma nacional de frete para quem vende online. Unimos as melhores transportadoras, tecnologia e atendimento humano para o seu e-commerce enviar com economia para todo o país.</p>
+          <p class="text-base md:text-lg text-gray-600 mb-8 leading-relaxed">Nossa equipe busca as melhores rotas e preços para que sua única preocupação seja o sucesso da sua loja.</p>
           <div class="grid grid-cols-2 gap-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <div><p class="text-3xl md:text-4xl font-black text-yellow-500 mb-1">+1000</p><p class="text-gray-600 font-bold uppercase text-xs md:text-sm">Clientes Atendidos</p></div>
             <div><p class="text-3xl md:text-4xl font-black text-yellow-500 mb-1">03</p><p class="text-gray-600 font-bold uppercase text-xs md:text-sm">Transportadoras</p></div>
@@ -147,7 +146,7 @@ ${header({ active: 'home' })}
         </div>
         <div class="order-1 lg:order-2 relative">
           <div class="absolute -top-4 -right-4 w-20 h-20 bg-yellow-400 rounded-full z-0 opacity-50" aria-hidden="true"></div>
-          <img src="/assets/img/equipe-freteq-640.webp" srcset="/assets/img/equipe-freteq-640.webp 640w, /assets/img/equipe-freteq-1024.webp 1024w" sizes="(max-width:1024px) 100vw, 512px" width="1024" height="626" alt="Equipe FreteQ na unidade de envios em Taguatinga Norte, Brasília" loading="lazy" decoding="async" class="rounded-3xl shadow-2xl relative z-10 w-full object-cover">
+          <img src="/assets/img/equipe-freteq-640.webp" srcset="/assets/img/equipe-freteq-640.webp 640w, /assets/img/equipe-freteq-1024.webp 1024w" sizes="(max-width:1024px) 100vw, 512px" width="1024" height="626" alt="Equipe FreteQ — logística para e-commerce em todo o Brasil" loading="lazy" decoding="async" class="rounded-3xl shadow-2xl relative z-10 w-full object-cover">
         </div>
       </div>
     </div>
@@ -168,7 +167,7 @@ ${header({ active: 'home' })}
         <div class="text-center p-8 bg-gray-50 rounded-3xl border border-gray-100">
           <div class="bg-yellow-400 text-black rounded-2xl w-14 h-14 flex items-center justify-center mx-auto mb-6">${svg.eye()}</div>
           <h3 class="text-xl font-bold mb-3 text-gray-900">Visão</h3>
-          <p class="text-gray-600">Ser referência em soluções de frete inteligente em Brasília e região.</p>
+          <p class="text-gray-600">Ser a referência em soluções de frete para e-commerce em todo o Brasil.</p>
         </div>
         <div class="text-center p-8 bg-gray-50 rounded-3xl border border-gray-100">
           <div class="bg-yellow-400 text-black rounded-2xl w-14 h-14 flex items-center justify-center mx-auto mb-6">${svg.gem()}</div>
@@ -186,9 +185,9 @@ ${header({ active: 'home' })}
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         ${[
-          ['"A FreteQ transformou a logística do meu e-commerce. Fretes muito mais baratos e incrivelmente rápidos."', 'Joana Silva', 'Brasília-DF'],
-          ['"Atendimento excelente na unidade física. Finalmente uma solução de fretes moderna e acessível em Taguatinga."', 'Marcos Andrade', 'Artesão'],
-          ['"Praticidade incrível. Calculo em casa e só deixo o pacote na loja. Economizo um tempo precioso."', 'Carla Mendes', 'Plano Piloto-DF'],
+          ['"A FreteQ transformou a logística do meu e-commerce. Fretes muito mais baratos e incrivelmente rápidos."', 'Joana Silva', 'E-commerce'],
+          ['"Atendimento excelente. Finalmente uma solução de fretes moderna e acessível para quem vende online."', 'Marcos Andrade', 'Loja virtual'],
+          ['"Praticidade incrível. Calculo o frete, imprimo a etiqueta e despacho no ponto mais perto. Economizo um tempo precioso."', 'Carla Mendes', 'E-commerce'],
         ]
           .map(
             ([quote, name, role]) => `
@@ -234,8 +233,8 @@ ${header({ active: 'home' })}
     <div class="container mx-auto px-6 text-center">
       <h2 class="text-2xl md:text-3xl font-black text-gray-900 mb-10 md:mb-16 uppercase tracking-wide">Melhores Transportadoras do Brasil</h2>
       <div class="flex flex-wrap justify-center items-center gap-8 md:gap-14 grayscale opacity-50 hover:grayscale-0 transition-all duration-500">
-        <img src="/assets/img/loggi.webp" alt="Logo Loggi — entregas rápidas em Brasília" width="226" height="74" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
-        <img src="/assets/img/jt-express.webp" alt="Logo J&amp;T Express Brasília" width="112" height="112" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
+        <img src="/assets/img/loggi.webp" alt="Logo Loggi — entregas em todo o Brasil" width="226" height="74" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
+        <img src="/assets/img/jt-express.webp" alt="Logo J&amp;T Express" width="112" height="112" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
         <img src="/assets/img/latam.webp" alt="Logo Latam Cargo" width="289" height="90" loading="lazy" class="h-10 md:h-14 w-auto object-contain">
       </div>
     </div>
@@ -254,21 +253,14 @@ ${header({ active: 'home' })}
         <form id="pontos-form" class="flex flex-col sm:flex-row gap-3 sm:items-end">
           <div class="flex-1 w-full">
             <label for="pontos-cep" class="block text-xs font-black text-gray-500 mb-2 uppercase tracking-widest">Seu CEP</label>
-            <input type="text" id="pontos-cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="Ex: 72130-370" maxlength="9" required class="w-full p-4 border-2 border-gray-100 rounded-xl focus:border-yellow-400 outline-none transition bg-gray-50 text-gray-900">
+            <input type="text" id="pontos-cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="Ex: 01310-100" maxlength="9" required class="w-full p-4 border-2 border-gray-100 rounded-xl focus:border-yellow-400 outline-none transition bg-gray-50 text-gray-900">
           </div>
           <button type="submit" id="pontos-submit" class="w-full sm:w-auto bg-black text-white px-8 py-4 rounded-xl font-black hover:bg-gray-800 transition shadow-xl text-lg">Buscar pontos</button>
         </form>
-        <p class="text-sm text-gray-500 mt-3">Mostramos os pontos Loggi e J&amp;T mais próximos. Latam Cargo despacha na unidade FreteQ.</p>
+        <p class="text-sm text-gray-500 mt-3">Mostramos os pontos Loggi e J&amp;T mais próximos do CEP informado.</p>
       </div>
 
-      <div id="pontos-results" class="pontos-grid max-w-6xl mx-auto">
-        <article class="bg-white p-6 rounded-3xl shadow-xl text-left h-full flex flex-col">
-          <p class="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">Central FreteQ · Latam Cargo</p>
-          <h3 class="text-xl font-black text-gray-900 mb-2">Unidade Taguatinga Norte</h3>
-          <p class="text-gray-600 font-medium mb-4">QNG 27 Lote 02 Loja 03<br>Taguatinga Norte - DF, 72130-370</p>
-          <p class="text-sm text-gray-500 mb-5">${svg.clock()}Seg à Sex: 08h - 18h | Sáb: 09h - 13h</p>
-          <a href="${MAPS}" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex w-full justify-center bg-black text-white px-6 py-3 rounded-xl font-black hover:bg-gray-800 transition">Abrir no mapa</a>
-        </article>
+      <div id="pontos-results" class="pontos-grid max-w-4xl mx-auto">
         <article class="bg-white/70 p-6 rounded-3xl border-2 border-dashed border-black/10 flex items-center justify-center text-center min-h-48">
           <p class="text-gray-700 font-medium">Informe o CEP para ver os <strong>LoggiPontos</strong> mais perto de você.</p>
         </article>
@@ -291,9 +283,9 @@ ${footer()}
 async function writeQuote() {
   await mkdir(join(PUBLIC, 'calcular-frete'), { recursive: true })
   const html = `${head({
-    title: 'Calcular Frete Online em Brasília | FreteQ',
+    title: 'Calcular Frete Online | FreteQ',
     description:
-      'Simule frete barato em Brasília: compare Loggi, J&T e Latam Cargo em segundos. Cotação online FreteQ com preços e prazos reais.',
+      'Simule frete para e-commerce em todo o Brasil: compare Loggi, J&T e Latam Cargo em segundos. Cotação online FreteQ com preços e prazos reais.',
     path: '/calcular-frete/',
     jsonLd: [
       breadcrumbLd([
@@ -317,7 +309,7 @@ ${header({ active: 'calcular' })}
     <div class="max-w-4xl mx-auto bg-white p-6 md:p-12 rounded-3xl shadow-xl border border-gray-100">
       <div class="text-center mb-8 md:mb-10">
         <h1 class="text-2xl md:text-4xl font-black text-gray-900 mb-2 md:mb-4 uppercase tracking-tight">Simulador de Frete</h1>
-        <p class="text-sm md:text-base text-gray-600">Obtenha cotações em tempo real das melhores transportadoras para envios a partir de Brasília.</p>
+        <p class="text-sm md:text-base text-gray-600">Obtenha cotações em tempo real das melhores transportadoras para envios em todo o Brasil.</p>
       </div>
       <div id="quote-unavailable" class="hidden text-center p-6 bg-amber-50 text-amber-900 rounded-2xl border border-amber-100 mb-6">
         <p class="font-medium mb-4">Simulador temporariamente indisponível. Fale conosco pelo WhatsApp para cotar seu frete.</p>
@@ -327,7 +319,7 @@ ${header({ active: 'calcular' })}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           <div>
             <label for="cepOrigem" class="block text-xs font-black text-gray-500 mb-2 uppercase tracking-widest">CEP Origem</label>
-            <input type="text" id="cepOrigem" name="cepOrigem" inputmode="numeric" autocomplete="postal-code" placeholder="Ex: 72130-370" maxlength="9" class="w-full p-4 border-2 border-gray-100 rounded-xl focus:border-yellow-400 outline-none transition bg-gray-50" required value="72130-370">
+            <input type="text" id="cepOrigem" name="cepOrigem" inputmode="numeric" autocomplete="postal-code" placeholder="Ex: 01310-100" maxlength="9" class="w-full p-4 border-2 border-gray-100 rounded-xl focus:border-yellow-400 outline-none transition bg-gray-50" required>
           </div>
           <div>
             <label for="cepDestino" class="block text-xs font-black text-gray-500 mb-2 uppercase tracking-widest">CEP Destino</label>
@@ -384,7 +376,7 @@ ${header({ active: 'calcular' })}
   </div>
 </section>
 <footer class="bg-black text-white py-8 text-center text-xs text-gray-500 uppercase tracking-widest border-t border-gray-900">
-  <p>&copy; <span data-year>2026</span> FreteQ — Brasília DF · <a href="/" class="hover:text-yellow-400">Voltar ao site</a></p>
+  <p>&copy; <span data-year>2026</span> FreteQ · <a href="/" class="hover:text-yellow-400">Voltar ao site</a></p>
 </footer>
 <script type="module" src="/js/main.js"></script>
 <script type="module" src="/js/quote.js"></script>
@@ -397,7 +389,7 @@ ${header({ active: 'calcular' })}
 async function writeTracking() {
   await mkdir(join(PUBLIC, 'rastreamento'), { recursive: true })
   const html = `${head({
-    title: 'Rastrear Encomenda Online | FreteQ Brasília',
+    title: 'Rastrear Encomenda Online | FreteQ',
     description:
       'Rastreie sua encomenda FreteQ em tempo real. Digite o código de rastreio e acompanhe a entrega passo a passo.',
     path: '/rastreamento/',

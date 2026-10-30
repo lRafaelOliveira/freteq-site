@@ -7,7 +7,6 @@ import { svg } from './svg.mjs'
 const SITE = 'https://freteq.com.br'
 const APP = 'https://app.freteq.com.br'
 const WA = 'https://wa.me/5561991344563'
-const MAPS = 'https://maps.google.com/?q=QNG+27+Lote+02+Loja+03,+Taguatinga+Norte+-+DF,+72130-370'
 const IG = 'https://www.instagram.com/freteq/'
 const CSS_V = createHash('sha1')
   .update(readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../src/styles.css')))
@@ -42,7 +41,7 @@ export function head({ title, description, path, jsonLd = [], extra = '' }) {
   <meta name="twitter:image" content="${SITE}/og-image.jpg">
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/styles.css?v=${CSS_V}">
-  <style>.pontos-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:stretch}.pontos-grid>*{min-width:0}.pontos-grid>.pontos-loading{grid-column:1/-1}@media(min-width:768px){.pontos-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}</style>
+  <style>.pontos-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:stretch}.pontos-grid>*{min-width:0}.pontos-grid>.pontos-loading{grid-column:1/-1}@media(min-width:768px){.pontos-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -61,7 +60,7 @@ export function header({ active = 'home' } = {}) {
 <header class="bg-yellow-400 shadow-md sticky top-0 z-50">
   <nav class="container mx-auto px-6 py-3 flex justify-between items-center" aria-label="Principal">
     <a href="/" aria-label="FreteQ — página inicial">
-      <img src="/assets/img/logo-freteq-256.webp" srcset="/assets/img/logo-freteq-256.webp 256w, /assets/img/logo-freteq-512.webp 512w" sizes="(max-width:768px) 120px, 168px" width="168" height="82" alt="FreteQ — logística e envio de encomendas em Brasília" class="h-10 md:h-14 w-auto">
+      <img src="/assets/img/logo-freteq-256.webp" srcset="/assets/img/logo-freteq-256.webp 256w, /assets/img/logo-freteq-512.webp 512w" sizes="(max-width:768px) 120px, 168px" width="168" height="82" alt="FreteQ — logística e envio de encomendas em todo o Brasil" class="h-10 md:h-14 w-auto">
     </a>
     <div class="hidden lg:flex items-center space-x-8">
       ${link('/#como-funciona', 'Como Funciona', 'como')}
@@ -100,7 +99,7 @@ export function footer() {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-10">
       <div class="flex flex-col items-center md:items-start">
         <img src="/assets/img/logo-freteq-256.webp" width="140" height="68" alt="FreteQ" class="h-14 w-auto mb-4 brightness-0 invert">
-        <p class="text-gray-400 text-sm leading-relaxed text-center md:text-left">Sua solução inteligente em logística. Economia e praticidade para seus envios em Brasília e no Distrito Federal.</p>
+        <p class="text-gray-400 text-sm leading-relaxed text-center md:text-left">Solução de frete para e-commerce em todo o Brasil. Melhor preço, atendimento e operação num só lugar.</p>
       </div>
       <div class="flex flex-col items-center md:items-start">
         <h3 class="text-white font-bold mb-4 uppercase tracking-widest text-sm">Acesso Rápido</h3>
@@ -117,7 +116,6 @@ export function footer() {
         <ul class="space-y-2 text-gray-400">
           <li><a href="tel:+5561991344563" class="hover:text-yellow-400 transition">${svg.phone()}(61) 99134-4563</a></li>
           <li><a href="mailto:contato@freteq.com.br" class="hover:text-yellow-400 transition">${svg.mail()}contato@freteq.com.br</a></li>
-          <li class="text-sm">QNG 27 Lote 02 Loja 03 — Taguatinga Norte, DF</li>
         </ul>
       </div>
       <div class="flex flex-col items-center md:items-start">
@@ -155,40 +153,21 @@ export function whatsappCard({ title = 'Ficou com alguma dúvida?', text = 'Noss
 export function localBusinessLd() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': 'Organization',
     '@id': `${SITE}/#business`,
     name: 'FreteQ',
     alternateName: 'FreteQ Logística',
-    description: 'Agência de envios e frete barato em Brasília. Compare Loggi, J&T e Latam Cargo. Cotação online, etiqueta e despacho em Taguatinga Norte.',
+    description: 'Plataforma nacional de frete para e-commerce. Compare Loggi, J&T e Latam Cargo, emita etiqueta e despache no ponto de coleta mais perto de você.',
     url: SITE,
     telephone: '+55-61-99134-4563',
     email: 'contato@freteq.com.br',
     image: `${SITE}/og-image.jpg`,
     logo: `${SITE}/assets/img/logo-freteq-512.webp`,
-    priceRange: '$$',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'QNG 27 Lote 02 Loja 03',
-      addressLocality: 'Taguatinga Norte',
-      addressRegion: 'DF',
-      postalCode: '72130-370',
-      addressCountry: 'BR',
+    areaServed: {
+      '@type': 'Country',
+      name: 'Brazil',
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: -15.8267,
-      longitude: -48.0645,
-    },
-    openingHoursSpecification: [
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '18:00' },
-      { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '09:00', closes: '13:00' },
-    ],
-    areaServed: [
-      { '@type': 'City', name: 'Brasília' },
-      { '@type': 'AdministrativeArea', name: 'Distrito Federal' },
-    ],
     sameAs: [IG],
-    hasMap: MAPS,
   }
 }
 
@@ -217,7 +196,7 @@ export function websiteLd() {
     '@id': `${SITE}/#website`,
     url: SITE,
     name: 'FreteQ',
-    description: 'Frete barato em Brasília — calcular frete online, emitir etiqueta e rastrear encomenda.',
+    description: 'Frete para e-commerce em todo o Brasil — calcular frete online, emitir etiqueta e rastrear encomenda.',
     publisher: { '@id': `${SITE}/#organization` },
     inLanguage: 'pt-BR',
   }
@@ -236,4 +215,4 @@ export function breadcrumbLd(items) {
   }
 }
 
-export { SITE, APP, WA, MAPS, IG, svg }
+export { SITE, APP, WA, IG, svg }

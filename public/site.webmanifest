@@ -1,7 +1,7 @@
 {
   "name": "FreteQ",
   "short_name": "FreteQ",
-  "description": "Frete barato e envio de encomendas em Brasília",
+  "description": "Frete para e-commerce em todo o Brasil",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#facc15",

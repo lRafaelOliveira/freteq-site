@@ -9,14 +9,6 @@ const LOGGI_LOCATOR = 'https://www.loggi.com/loggipontos/'
 const JT_LOCATOR = 'https://www.jtexpress.com.br/mobile/networkQuery'
 const MAX_POINTS = 3
 
-const FRETEQ_HUB = {
-  name: 'Unidade Taguatinga Norte',
-  subtitle: 'Central FreteQ · Latam Cargo',
-  addressHtml: 'QNG 27 Lote 02 Loja 03<br>Taguatinga Norte - DF, 72130-370',
-  hours: 'Seg à Sex: 08h - 18h | Sáb: 09h - 13h',
-  mapsUrl: config.MAPS_URL,
-}
-
 if (cepInput) {
   cepInput.addEventListener('input', () => {
     const d = onlyDigits(cepInput.value).slice(0, 8)
@@ -60,17 +52,6 @@ function mapsUrl(point) {
     return `https://www.google.com/maps/dir/?api=1&destination=${point.lat},${point.lng}`
   }
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(formatAddress(point) || point.name)}`
-}
-
-function hubCard() {
-  return `
-    <article class="bg-white p-6 rounded-3xl shadow-xl text-left h-full flex flex-col">
-      <p class="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">${escapeHtml(FRETEQ_HUB.subtitle)}</p>
-      <h3 class="text-xl font-black text-gray-900 mb-2">${escapeHtml(FRETEQ_HUB.name)}</h3>
-      <p class="text-gray-600 font-medium mb-4">${FRETEQ_HUB.addressHtml}</p>
-      <p class="text-sm text-gray-500 mb-5">${escapeHtml(FRETEQ_HUB.hours)}</p>
-      <a href="${FRETEQ_HUB.mapsUrl}" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex w-full justify-center bg-black text-white px-6 py-3 rounded-xl font-black hover:bg-gray-800 transition">Abrir no mapa</a>
-    </article>`
 }
 
 function displayName(name) {
@@ -128,7 +109,6 @@ function renderResults(payload, cep) {
   const loggi = findCarrier(payload?.carriers, 'loggi')
   const jt = findCarrier(payload?.carriers, 'jtexpress')
   results.innerHTML = `
-      ${hubCard()}
       ${carrierCard(
         'Loggi',
         'Não encontramos LoggiPonto para este CEP. Abra o localizador da Loggi.',
@@ -147,7 +127,6 @@ function renderResults(payload, cep) {
 
 function renderFallback(cep) {
   results.innerHTML = `
-      ${hubCard()}
       ${carrierCard('Loggi', 'Não foi possível listar agora. Abra o localizador da Loggi para ver os pontos perto de você.', LOGGI_LOCATOR, 'Ver no site da Loggi', [])}
       ${carrierCard('J&T', 'Não foi possível listar agora. Abra o localizador da J&T para ver as unidades perto de você.', jtLocator(cep), 'Ver no site da J&T', [])}`
 }
