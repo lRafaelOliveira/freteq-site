@@ -1,3 +1,7 @@
+import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { svg } from './svg.mjs'
 
 const SITE = 'https://freteq.com.br'
@@ -5,6 +9,10 @@ const APP = 'https://app.freteq.com.br'
 const WA = 'https://wa.me/5561991344563'
 const MAPS = 'https://maps.google.com/?q=QNG+27+Lote+02+Loja+03,+Taguatinga+Norte+-+DF,+72130-370'
 const IG = 'https://www.instagram.com/freteq/'
+const CSS_V = createHash('sha1')
+  .update(readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../src/styles.css')))
+  .digest('hex')
+  .slice(0, 10)
 
 export function head({ title, description, path, jsonLd = [], extra = '' }) {
   const canonical = `${SITE}${path}`
@@ -33,7 +41,8 @@ export function head({ title, description, path, jsonLd = [], extra = '' }) {
   <meta name="twitter:description" content="${description}">
   <meta name="twitter:image" content="${SITE}/og-image.jpg">
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=${CSS_V}">
+  <style>.pontos-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:stretch}.pontos-grid>*{min-width:0}.pontos-grid>.pontos-loading{grid-column:1/-1}@media(min-width:768px){.pontos-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}</style>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
