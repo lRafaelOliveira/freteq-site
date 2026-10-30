@@ -70,7 +70,7 @@ ${header({ active: 'home' })}
       <h1 id="hero-title" class="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 uppercase tracking-tight">Envie suas encomendas com mais economia e praticidade.</h1>
       <p class="text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 md:mb-12">O seu e-commerce merece o melhor frete, o melhor atendimento e a melhor solução.</p>
       <div class="flex justify-center px-4 sm:px-0">
-        <a href="/calcular-frete/" class="hero-cta">CALCULAR FRETE AGORA ${svg.arrowRight()}</a>
+        <a href="${APP}/login" class="hero-cta">CALCULAR FRETE AGORA ${svg.arrowRight()}</a>
       </div>
     </div>
   </section>
