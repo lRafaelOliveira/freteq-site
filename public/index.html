@@ -323,22 +323,20 @@
         <p class="text-sm text-gray-500 mt-3">Mostramos os pontos Loggi e J&amp;T mais próximos. Latam Cargo despacha na unidade FreteQ.</p>
       </div>
 
-      <div id="pontos-results" class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <article class="bg-white p-6 rounded-3xl shadow-xl text-left">
-            <p class="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">Central FreteQ · Latam Cargo</p>
-            <h3 class="text-xl font-black text-gray-900 mb-2">Unidade Taguatinga Norte</h3>
-            <p class="text-gray-600 font-medium mb-4">QNG 27 Lote 02 Loja 03<br>Taguatinga Norte - DF, 72130-370</p>
-            <p class="text-sm text-gray-500 mb-5"><svg class="inline w-4 h-4 mr-2 -mt-1 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Seg à Sex: 08h - 18h | Sáb: 09h - 13h</p>
-            <a href="https://maps.google.com/?q=QNG+27+Lote+02+Loja+03,+Taguatinga+Norte+-+DF,+72130-370" target="_blank" rel="noopener noreferrer" class="inline-flex w-full justify-center bg-black text-white px-6 py-3 rounded-xl font-black hover:bg-gray-800 transition">Abrir no mapa</a>
-          </article>
-          <article class="bg-white/70 p-6 rounded-3xl border-2 border-dashed border-black/10 flex items-center justify-center text-center min-h-48">
-            <p class="text-gray-700 font-medium">Informe o CEP para ver os <strong>LoggiPontos</strong> mais perto de você.</p>
-          </article>
-          <article class="bg-white/70 p-6 rounded-3xl border-2 border-dashed border-black/10 flex items-center justify-center text-center min-h-48">
-            <p class="text-gray-700 font-medium">Informe o CEP para ver as unidades <strong>J&amp;T</strong> mais perto de você.</p>
-          </article>
-        </div>
+      <div id="pontos-results" class="pontos-grid max-w-6xl mx-auto">
+        <article class="bg-white p-6 rounded-3xl shadow-xl text-left h-full flex flex-col">
+          <p class="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">Central FreteQ · Latam Cargo</p>
+          <h3 class="text-xl font-black text-gray-900 mb-2">Unidade Taguatinga Norte</h3>
+          <p class="text-gray-600 font-medium mb-4">QNG 27 Lote 02 Loja 03<br>Taguatinga Norte - DF, 72130-370</p>
+          <p class="text-sm text-gray-500 mb-5"><svg class="inline w-4 h-4 mr-2 -mt-1 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Seg à Sex: 08h - 18h | Sáb: 09h - 13h</p>
+          <a href="https://maps.google.com/?q=QNG+27+Lote+02+Loja+03,+Taguatinga+Norte+-+DF,+72130-370" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex w-full justify-center bg-black text-white px-6 py-3 rounded-xl font-black hover:bg-gray-800 transition">Abrir no mapa</a>
+        </article>
+        <article class="bg-white/70 p-6 rounded-3xl border-2 border-dashed border-black/10 flex items-center justify-center text-center min-h-48">
+          <p class="text-gray-700 font-medium">Informe o CEP para ver os <strong>LoggiPontos</strong> mais perto de você.</p>
+        </article>
+        <article class="bg-white/70 p-6 rounded-3xl border-2 border-dashed border-black/10 flex items-center justify-center text-center min-h-48">
+          <p class="text-gray-700 font-medium">Informe o CEP para ver as unidades <strong>J&amp;T</strong> mais perto de você.</p>
+        </article>
       </div>
     </div>
   </section>

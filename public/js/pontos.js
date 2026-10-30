@@ -64,12 +64,12 @@ function mapsUrl(point) {
 
 function hubCard() {
   return `
-    <article class="bg-white p-6 rounded-3xl shadow-xl text-left">
+    <article class="bg-white p-6 rounded-3xl shadow-xl text-left h-full flex flex-col">
       <p class="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">${escapeHtml(FRETEQ_HUB.subtitle)}</p>
       <h3 class="text-xl font-black text-gray-900 mb-2">${escapeHtml(FRETEQ_HUB.name)}</h3>
       <p class="text-gray-600 font-medium mb-4">${FRETEQ_HUB.addressHtml}</p>
       <p class="text-sm text-gray-500 mb-5">${escapeHtml(FRETEQ_HUB.hours)}</p>
-      <a href="${FRETEQ_HUB.mapsUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex w-full justify-center bg-black text-white px-6 py-3 rounded-xl font-black hover:bg-gray-800 transition">Abrir no mapa</a>
+      <a href="${FRETEQ_HUB.mapsUrl}" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex w-full justify-center bg-black text-white px-6 py-3 rounded-xl font-black hover:bg-gray-800 transition">Abrir no mapa</a>
     </article>`
 }
 
@@ -101,16 +101,16 @@ function carrierCard(title, emptyMessage, locatorUrl, locatorLabel, points) {
       ? `<ul class="space-y-3">${list.map(pointItem).join('')}</ul>`
       : `<p class="text-gray-600 font-medium">${escapeHtml(emptyMessage)}</p>`
   return `
-    <article class="bg-white p-6 rounded-3xl shadow-xl text-left flex flex-col">
+    <article class="bg-white p-6 rounded-3xl shadow-xl text-left h-full flex flex-col">
       <p class="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">${escapeHtml(title)}</p>
       <div class="flex-1">${body}</div>
-      <a href="${escapeHtml(locatorUrl)}" target="_blank" rel="noopener noreferrer" class="mt-5 inline-flex w-full justify-center border-2 border-black text-black px-6 py-3 rounded-xl font-black hover:bg-black hover:text-white transition">${escapeHtml(locatorLabel)}</a>
+      <a href="${escapeHtml(locatorUrl)}" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex w-full justify-center border-2 border-black text-black px-6 py-3 rounded-xl font-black hover:bg-black hover:text-white transition">${escapeHtml(locatorLabel)}</a>
     </article>`
 }
 
 function renderLoading() {
   results.innerHTML = `
-    <div class="flex flex-col items-center py-10 bg-white/60 rounded-3xl">
+    <div class="pontos-loading flex flex-col items-center py-10 bg-white/60 rounded-3xl">
       <div class="loader mb-4"></div>
       <p class="font-bold text-gray-700 animate-pulse">Buscando os pontos mais próximos...</p>
     </div>`
@@ -128,7 +128,6 @@ function renderResults(payload, cep) {
   const loggi = findCarrier(payload?.carriers, 'loggi')
   const jt = findCarrier(payload?.carriers, 'jtexpress')
   results.innerHTML = `
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       ${hubCard()}
       ${carrierCard(
         'Loggi',
@@ -143,17 +142,14 @@ function renderResults(payload, cep) {
         jt?.locatorUrl || jtLocator(cep),
         'Ver no site da J&T',
         jt?.points,
-      )}
-    </div>`
+      )}`
 }
 
 function renderFallback(cep) {
   results.innerHTML = `
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       ${hubCard()}
       ${carrierCard('Loggi', 'Não foi possível listar agora. Abra o localizador da Loggi para ver os pontos perto de você.', LOGGI_LOCATOR, 'Ver no site da Loggi', [])}
-      ${carrierCard('J&T', 'Não foi possível listar agora. Abra o localizador da J&T para ver as unidades perto de você.', jtLocator(cep), 'Ver no site da J&T', [])}
-    </div>`
+      ${carrierCard('J&T', 'Não foi possível listar agora. Abra o localizador da J&T para ver as unidades perto de você.', jtLocator(cep), 'Ver no site da J&T', [])}`
 }
 
 if (form && results) {

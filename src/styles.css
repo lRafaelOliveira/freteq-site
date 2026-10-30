@@ -63,6 +63,24 @@
     height: 40px;
     animation: spin 1s linear infinite;
   }
+
+  .pontos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+  .pontos-grid > * {
+    min-width: 0;
+  }
+  .pontos-grid > .pontos-loading {
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 768px) {
+    .pontos-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
 }
 
 @keyframes spin {
