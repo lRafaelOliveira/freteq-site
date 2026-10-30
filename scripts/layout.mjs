@@ -59,7 +59,7 @@ export function header({ active = 'home' } = {}) {
       ${link('/#servicos', 'Vantagens', 'servicos')}
       ${link('/#sobre-nos', 'Sobre Nós', 'sobre')}
       ${link('/#pontos', 'Pontos', 'pontos')}
-      ${link('/calcular-frete/', 'Calcular Frete', 'calcular')}
+      ${link(`${APP}/login`, 'Calcular Frete', 'calcular')}
       ${link('/rastreamento/', 'Rastrear', 'rastrear')}
       ${link(`${APP}/cadastro`, 'Seja Parceiro', 'parceiro')}
     </div>
@@ -75,7 +75,7 @@ export function header({ active = 'home' } = {}) {
     <a href="/#servicos" class="block py-2 text-gray-600 hover:text-yellow-500">Vantagens</a>
     <a href="/#sobre-nos" class="block py-2 text-gray-600 hover:text-yellow-500">Sobre Nós</a>
     <a href="/#pontos" class="block py-2 text-gray-600 hover:text-yellow-500">Pontos de Coleta</a>
-    <a href="/calcular-frete/" class="block py-2 text-gray-600 hover:text-yellow-500">Calcular Frete</a>
+    <a href="${APP}/login" class="block py-2 text-gray-600 hover:text-yellow-500">Calcular Frete</a>
     <a href="/rastreamento/" class="block py-2 text-gray-600 hover:text-yellow-500">Rastrear</a>
     <a href="${APP}/login" class="block py-2 text-gray-600 hover:text-yellow-500">Acessar Painel</a>
     <a href="${APP}/cadastro" class="block py-2 text-gray-600 hover:text-yellow-500">Seja Parceiro</a>
@@ -98,7 +98,7 @@ export function footer() {
         <ul class="space-y-2 text-gray-400">
           <li><a href="/#servicos" class="hover:text-yellow-400 transition">Vantagens</a></li>
           <li><a href="/#pontos" class="hover:text-yellow-400 transition">Pontos de Coleta</a></li>
-          <li><a href="/calcular-frete/" class="hover:text-yellow-400 transition">Calcular Frete</a></li>
+          <li><a href="${APP}/login" class="hover:text-yellow-400 transition">Calcular Frete</a></li>
           <li><a href="/rastreamento/" class="hover:text-yellow-400 transition">Rastrear Pedido</a></li>
           <li><a href="${APP}/cadastro" class="hover:text-yellow-400 transition">Seja Parceiro</a></li>
         </ul>
