@@ -13,9 +13,18 @@ const CSS_V = createHash('sha1')
   .digest('hex')
   .slice(0, 10)
 
-export function head({ title, description, path, jsonLd = [], extra = '' }) {
+export function head({
+  title,
+  description,
+  path,
+  jsonLd = [],
+  extra = '',
+  robots = 'index,follow,max-image-preview:large',
+  imageAlt = 'FreteQ — frete para e-commerce em todo o Brasil',
+} = {}) {
   const canonical = `${SITE}${path}`
   const scripts = Array.isArray(jsonLd) ? jsonLd : [jsonLd]
+  const ogImage = `${SITE}/og-image.jpg`
   return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -23,22 +32,29 @@ export function head({ title, description, path, jsonLd = [], extra = '' }) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
   <meta name="description" content="${description}">
+  <meta name="author" content="FreteQ">
   <meta name="theme-color" content="#facc15">
-  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="robots" content="${robots}">
   <link rel="canonical" href="${canonical}">
+  <link rel="alternate" hreflang="pt-BR" href="${canonical}">
+  <link rel="alternate" hreflang="x-default" href="${canonical}">
+  <link rel="sitemap" type="application/xml" href="${SITE}/sitemap.xml">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="FreteQ">
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="${SITE}/og-image.jpg">
+  <meta property="og:image" content="${ogImage}">
+  <meta property="og:image:alt" content="${imageAlt}">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
-  <meta name="twitter:image" content="${SITE}/og-image.jpg">
+  <meta name="twitter:image" content="${ogImage}">
+  <meta name="twitter:image:alt" content="${imageAlt}">
   <link rel="preload" href="/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/styles.css?v=${CSS_V}">
   <style>.pontos-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:stretch}.pontos-grid>*{min-width:0}.pontos-grid>.pontos-loading{grid-column:1/-1}@media(min-width:768px){.pontos-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>
@@ -66,7 +82,7 @@ export function header({ active = 'home' } = {}) {
       ${link('/#como-funciona', 'Como Funciona', 'como')}
       ${link('/#servicos', 'Vantagens', 'servicos')}
       ${link('/#sobre-nos', 'Sobre Nós', 'sobre')}
-      ${link('/#pontos', 'Pontos', 'pontos')}
+      ${link('/pontos-de-coleta/', 'Pontos', 'pontos')}
       ${link(`${APP}/login`, 'Calcular Frete', 'calcular')}
       ${link('/rastreamento/', 'Rastrear', 'rastrear')}
       ${link(`${APP}/cadastro`, 'Seja Parceiro', 'parceiro')}
@@ -82,7 +98,7 @@ export function header({ active = 'home' } = {}) {
     <a href="/#como-funciona" class="block py-2 text-gray-600 hover:text-yellow-500">Como Funciona</a>
     <a href="/#servicos" class="block py-2 text-gray-600 hover:text-yellow-500">Vantagens</a>
     <a href="/#sobre-nos" class="block py-2 text-gray-600 hover:text-yellow-500">Sobre Nós</a>
-    <a href="/#pontos" class="block py-2 text-gray-600 hover:text-yellow-500">Pontos de Coleta</a>
+    <a href="/pontos-de-coleta/" class="block py-2 text-gray-600 hover:text-yellow-500">Pontos de Coleta</a>
     <a href="${APP}/login" class="block py-2 text-gray-600 hover:text-yellow-500">Calcular Frete</a>
     <a href="/rastreamento/" class="block py-2 text-gray-600 hover:text-yellow-500">Rastrear</a>
     <a href="${APP}/login" class="block py-2 text-gray-600 hover:text-yellow-500">Acessar Painel</a>
@@ -104,11 +120,12 @@ export function footer() {
       <div class="flex flex-col items-center md:items-start">
         <h3 class="text-white font-bold mb-4 uppercase tracking-widest text-sm">Acesso Rápido</h3>
         <ul class="space-y-2 text-gray-400">
-          <li><a href="/#servicos" class="hover:text-yellow-400 transition">Vantagens</a></li>
-          <li><a href="/#pontos" class="hover:text-yellow-400 transition">Pontos de Coleta</a></li>
+          <li><a href="/#como-funciona" class="hover:text-yellow-400 transition">Como funciona</a></li>
           <li><a href="${APP}/login" class="hover:text-yellow-400 transition">Calcular Frete</a></li>
-          <li><a href="/rastreamento/" class="hover:text-yellow-400 transition">Rastrear Pedido</a></li>
-          <li><a href="${APP}/cadastro" class="hover:text-yellow-400 transition">Seja Parceiro</a></li>
+          <li><a href="/pontos-de-coleta/" class="hover:text-yellow-400 transition">Pontos de coleta</a></li>
+          <li><a href="/rastreamento/" class="hover:text-yellow-400 transition">Rastrear encomenda</a></li>
+          <li><a href="/#faq" class="hover:text-yellow-400 transition">Dúvidas frequentes</a></li>
+          <li><a href="${APP}/cadastro" class="hover:text-yellow-400 transition">Criar conta</a></li>
         </ul>
       </div>
       <div class="flex flex-col items-center md:items-start">
@@ -150,43 +167,35 @@ export function whatsappCard({ title = 'Ficou com alguma dúvida?', text = 'Noss
 </section>`
 }
 
-export function localBusinessLd() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': `${SITE}/#business`,
-    name: 'FreteQ',
-    alternateName: 'FreteQ Logística',
-    description: 'Plataforma nacional de frete para e-commerce. Compare Loggi, J&T e Latam Cargo, emita etiqueta e despache no ponto de coleta mais perto de você.',
-    url: SITE,
-    telephone: '+55-61-99134-4563',
-    email: 'contato@freteq.com.br',
-    image: `${SITE}/og-image.jpg`,
-    logo: `${SITE}/assets/img/logo-freteq-512.webp`,
-    areaServed: {
-      '@type': 'Country',
-      name: 'Brazil',
-    },
-    sameAs: [IG],
-  }
-}
-
 export function organizationLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${SITE}/#organization`,
     name: 'FreteQ',
+    alternateName: 'FreteQ Logística',
+    description:
+      'Plataforma nacional de frete para e-commerce. Compare Loggi, J&T e Latam Cargo, emita etiqueta e despache no ponto de coleta mais perto de você.',
     url: SITE,
+    telephone: '+55-61-99134-4563',
+    email: 'contato@freteq.com.br',
+    image: `${SITE}/og-image.jpg`,
     logo: `${SITE}/assets/img/logo-freteq-512.webp`,
+    areaServed: { '@type': 'Country', name: 'Brazil' },
+    sameAs: [IG],
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+55-61-99134-4563',
       contactType: 'customer service',
       areaServed: 'BR',
-      availableLanguage: 'Portuguese',
+      availableLanguage: ['Portuguese', 'pt-BR'],
     },
   }
+}
+
+/** @deprecated use organizationLd — kept so older callers keep compiling */
+export function localBusinessLd() {
+  return organizationLd()
 }
 
 export function websiteLd() {
@@ -196,9 +205,74 @@ export function websiteLd() {
     '@id': `${SITE}/#website`,
     url: SITE,
     name: 'FreteQ',
-    description: 'Frete para e-commerce em todo o Brasil — calcular frete online, emitir etiqueta e rastrear encomenda.',
+    description:
+      'Frete para e-commerce em todo o Brasil — calcular frete online, emitir etiqueta e rastrear encomenda.',
     publisher: { '@id': `${SITE}/#organization` },
     inLanguage: 'pt-BR',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE}/rastreamento/?codigo={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  }
+}
+
+export function softwareLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Painel FreteQ',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    url: `${APP}/cadastro`,
+    description:
+      'Painel para cotar frete, emitir etiqueta de envio, recarregar saldo e rastrear encomendas do e-commerce.',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'BRL' },
+    provider: { '@id': `${SITE}/#organization` },
+    inLanguage: 'pt-BR',
+  }
+}
+
+export function howToShipLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'Como enviar uma encomenda com a FreteQ',
+    description: 'Calcule o frete, pague, imprima a etiqueta e despache no ponto de coleta.',
+    totalTime: 'PT15M',
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Simule o frete',
+        text: 'Informe origem, destino, peso e dimensões e compare Loggi, J&T e Latam Cargo.',
+        url: `${APP}/login`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Pague e imprima a etiqueta',
+        text: 'Crie a conta no painel, recarregue o saldo e gere a etiqueta de envio.',
+        url: `${APP}/cadastro`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Leve no ponto de coleta',
+        text: 'Despache no LoggiPonto ou na unidade J&T mais perto do seu CEP.',
+        url: `${SITE}/pontos-de-coleta/`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Rastreie a encomenda',
+        text: 'Acompanhe o código de rastreio até a entrega.',
+        url: `${SITE}/rastreamento/`,
+      },
+    ],
   }
 }
 

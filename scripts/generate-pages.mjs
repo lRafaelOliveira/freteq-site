@@ -3,13 +3,15 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   APP,
+  SITE,
   WA,
   breadcrumbLd,
   footer,
   head,
   header,
-  localBusinessLd,
+  howToShipLd,
   organizationLd,
+  softwareLd,
   svg,
   websiteLd,
   whatsappCard,
@@ -19,12 +21,28 @@ const PUBLIC = fileURLToPath(new URL('../public', import.meta.url))
 
 const faqItems = [
   {
-    q: 'Quais itens não posso enviar?',
-    a: 'Não enviamos produtos perigosos, inflamáveis, armas, animais vivos ou dinheiro. Consulte a lista completa com o atendimento FreteQ.',
+    q: 'Como calcular o frete do meu e-commerce?',
+    a: 'Informe CEP de origem, CEP de destino, peso e dimensões no simulador FreteQ. Comparamos Loggi, J&T Express e Latam Cargo e mostramos preço e prazo na hora. Depois é só criar a conta no painel e emitir a etiqueta.',
+  },
+  {
+    q: 'A FreteQ é dos Correios?',
+    a: 'Não. A FreteQ é uma plataforma independente de frete para e-commerce. Conectamos sua loja a transportadoras como Loggi, J&T Express e Latam Cargo, com tabelas negociadas e atendimento próprio.',
+  },
+  {
+    q: 'Quais transportadoras a FreteQ trabalha?',
+    a: 'Loggi, J&T Express e Latam Cargo, com cobertura nacional. Você escolhe a opção com melhor preço ou prazo na cotação.',
+  },
+  {
+    q: 'Como emitir a etiqueta de envio?',
+    a: 'Crie sua conta no painel FreteQ, recarregue o saldo, confirme o envio e imprima a etiqueta. Em seguida leve o pacote no ponto de coleta da transportadora escolhida.',
   },
   {
     q: 'Onde eu despacho a encomenda?',
     a: 'Cada transportadora tem o próprio ponto de coleta. Informe seu CEP em Pontos de Coleta para ver o LoggiPonto ou a unidade J&T mais perto. Depois de pagar e imprimir a etiqueta, leve o pacote no ponto e acompanhe o rastreio.',
+  },
+  {
+    q: 'Quais itens não posso enviar?',
+    a: 'Não enviamos produtos perigosos, inflamáveis, armas, animais vivos ou dinheiro. Consulte a lista completa com o atendimento FreteQ.',
   },
   {
     q: 'Minha encomenda tem seguro?',
@@ -50,11 +68,11 @@ function faqLd() {
 
 async function writeIndex() {
   const html = `${head({
-    title: 'FreteQ — Frete para e-commerce em todo o Brasil',
+    title: 'Frete para e-commerce | Calcular frete online — FreteQ',
     description:
-      'Plataforma nacional de frete para e-commerce. Compare Loggi, J&T e Latam Cargo, emita etiqueta e despache no ponto mais perto de você.',
+      'Calcule frete online, compare Loggi, J&T e Latam Cargo e emita etiqueta. Plataforma nacional de envio para e-commerce em todo o Brasil.',
     path: '/',
-    jsonLd: [localBusinessLd(), organizationLd(), websiteLd(), faqLd()],
+    jsonLd: [organizationLd(), websiteLd(), softwareLd(), howToShipLd(), faqLd()],
   })}
 <body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
 ${header({ active: 'home' })}
@@ -67,8 +85,8 @@ ${header({ active: 'home' })}
     </picture>
     <div class="absolute inset-0 bg-black/70" aria-hidden="true"></div>
     <div class="relative container mx-auto px-6 py-20 md:py-32 lg:py-40 text-center">
-      <h1 id="hero-title" class="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 uppercase tracking-tight">Envie suas encomendas com mais economia e praticidade.</h1>
-      <p class="text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 md:mb-12">O seu e-commerce merece o melhor frete, o melhor atendimento e a melhor solução.</p>
+      <h1 id="hero-title" class="text-4xl md:text-5xl lg:text-7xl font-black leading-tight mb-6 uppercase tracking-tight">Frete para e-commerce com mais economia e praticidade.</h1>
+      <p class="text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 md:mb-12">Calcule o frete online, emita a etiqueta e despache no ponto mais perto. O seu e-commerce merece o melhor frete, o melhor atendimento e a melhor solução.</p>
       <div class="flex justify-center px-4 sm:px-0">
         <a href="${APP}/login" class="hero-cta">CALCULAR FRETE AGORA ${svg.arrowRight()}</a>
       </div>
@@ -85,7 +103,7 @@ ${header({ active: 'home' })}
         ${[
           ['1', 'Simule Online', 'Acesse nossa calculadora e compare transportadoras instantaneamente.'],
           ['2', 'Pague e Imprima', 'Pague com segurança e gere sua etiqueta de envio em segundos.'],
-          ['3', 'Leve no ponto', 'Despache no ponto de coleta da transportadora mais perto de você. <a href="#pontos" class="font-bold text-gray-900 underline underline-offset-2">Ver pontos</a>'],
+          ['3', 'Leve no ponto', 'Despache no ponto de coleta da transportadora mais perto de você. <a href="/pontos-de-coleta/" class="font-bold text-gray-900 underline underline-offset-2">Ver pontos</a>'],
           ['4', 'Rastreie', 'Acompanhe sua encomenda passo a passo até o destino final.'],
         ]
           .map(
@@ -116,7 +134,7 @@ ${header({ active: 'home' })}
         <div class="bg-gray-50 p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition">
           <div class="bg-black text-yellow-400 w-14 h-14 flex items-center justify-center rounded-2xl mb-6 shadow-md">${svg.mapPin()}</div>
           <h3 class="text-xl font-bold mb-3 text-gray-900">Pontos de Coleta</h3>
-          <p class="text-gray-600 leading-relaxed">Loggi, J&amp;T e Latam Cargo têm pontos perto de você. Informe o CEP e encontre o mais próximo. <a href="#pontos" class="font-bold text-gray-900 underline underline-offset-2">Ver pontos</a></p>
+          <p class="text-gray-600 leading-relaxed">Loggi, J&amp;T e Latam Cargo têm pontos perto de você. Informe o CEP e encontre o mais próximo. <a href="/pontos-de-coleta/" class="font-bold text-gray-900 underline underline-offset-2">Ver pontos</a></p>
         </div>
         <div class="bg-gray-50 p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition">
           <div class="bg-yellow-400 text-black w-14 h-14 flex items-center justify-center rounded-2xl mb-6 shadow-md">${svg.truck()}</div>
@@ -283,16 +301,16 @@ ${footer()}
 async function writeQuote() {
   await mkdir(join(PUBLIC, 'calcular-frete'), { recursive: true })
   const html = `${head({
-    title: 'Calcular Frete Online | FreteQ',
+    title: 'Calcular frete online: preço e prazo | FreteQ',
     description:
-      'Simule frete para e-commerce em todo o Brasil: compare Loggi, J&T e Latam Cargo em segundos. Cotação online FreteQ com preços e prazos reais.',
+      'Simule frete para e-commerce: compare preço e prazo de Loggi, J&T e Latam Cargo em segundos. Cotação online grátis, sem cadastro.',
     path: '/calcular-frete/',
     jsonLd: [
       breadcrumbLd([
         { name: 'Início', url: '/' },
-        { name: 'Calcular Frete', url: '/calcular-frete/' },
+        { name: 'Calcular frete', url: '/calcular-frete/' },
       ]),
-      localBusinessLd(),
+      organizationLd(),
     ],
   })}
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
@@ -308,8 +326,8 @@ ${header({ active: 'calcular' })}
     </nav>
     <div class="max-w-4xl mx-auto bg-white p-6 md:p-12 rounded-3xl shadow-xl border border-gray-100">
       <div class="text-center mb-8 md:mb-10">
-        <h1 class="text-2xl md:text-4xl font-black text-gray-900 mb-2 md:mb-4 uppercase tracking-tight">Simulador de Frete</h1>
-        <p class="text-sm md:text-base text-gray-600">Obtenha cotações em tempo real das melhores transportadoras para envios em todo o Brasil.</p>
+        <h1 class="text-2xl md:text-4xl font-black text-gray-900 mb-2 md:mb-4 uppercase tracking-tight">Calcular frete online</h1>
+        <p class="text-sm md:text-base text-gray-600">Compare preço e prazo de Loggi, J&amp;T e Latam Cargo para envios em todo o Brasil. Sem cadastro para simular.</p>
       </div>
       <div id="quote-unavailable" class="hidden text-center p-6 bg-amber-50 text-amber-900 rounded-2xl border border-amber-100 mb-6">
         <p class="font-medium mb-4">Simulador temporariamente indisponível. Fale conosco pelo WhatsApp para cotar seu frete.</p>
@@ -360,6 +378,19 @@ ${header({ active: 'calcular' })}
       <div id="quote-results" class="mt-10" role="status" aria-live="polite"></div>
       <p class="mt-8 text-center text-sm text-gray-500">Gostou do preço? <a href="${APP}/cadastro" class="text-yellow-600 font-bold hover:underline">Crie sua conta</a> e emita a etiqueta no painel FreteQ.</p>
     </div>
+
+    <article class="max-w-4xl mx-auto mt-12 space-y-6 text-gray-700 leading-relaxed">
+      <h2 class="text-2xl md:text-3xl font-black text-gray-900 uppercase">Como funciona a cotação de frete</h2>
+      <p>O simulador FreteQ calcula o frete do seu e-commerce com as tabelas das transportadoras parceiras. Você informa origem, destino, peso, dimensões e valor declarado; nós devolvemos as opções com preço e prazo para você escolher.</p>
+      <h3 class="text-xl font-bold text-gray-900">O que muda o preço do frete</h3>
+      <ul class="list-disc pl-5 space-y-2">
+        <li>Peso e cubagem do pacote (altura × largura × comprimento).</li>
+        <li>Distância entre o CEP de origem e o de destino.</li>
+        <li>Valor declarado, usado no seguro básico do envio.</li>
+        <li>Serviço escolhido — mais barato ou mais rápido.</li>
+      </ul>
+      <p>Depois de gostar do preço, <a href="${APP}/cadastro" class="font-bold text-gray-900 underline underline-offset-2">crie sua conta</a>, emita a etiqueta e leve o pacote no <a href="/pontos-de-coleta/" class="font-bold text-gray-900 underline underline-offset-2">ponto de coleta</a> mais perto. O <a href="/rastreamento/" class="font-bold text-gray-900 underline underline-offset-2">rastreio</a> fica no mesmo painel.</p>
+    </article>
   </div>
 </main>
 <section class="pb-12 px-4">
@@ -389,16 +420,16 @@ ${header({ active: 'calcular' })}
 async function writeTracking() {
   await mkdir(join(PUBLIC, 'rastreamento'), { recursive: true })
   const html = `${head({
-    title: 'Rastrear Encomenda Online | FreteQ',
+    title: 'Rastrear encomenda pelo código | FreteQ',
     description:
-      'Rastreie sua encomenda FreteQ em tempo real. Digite o código de rastreio e acompanhe a entrega passo a passo.',
+      'Rastreie sua encomenda FreteQ pelo código de rastreio. Acompanhe postagem, trânsito e entrega em tempo real.',
     path: '/rastreamento/',
     jsonLd: [
       breadcrumbLd([
         { name: 'Início', url: '/' },
         { name: 'Rastreamento', url: '/rastreamento/' },
       ]),
-      localBusinessLd(),
+      organizationLd(),
     ],
   })}
 <body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
@@ -414,8 +445,8 @@ ${header({ active: 'rastrear' })}
         </ol>
       </nav>
       <div class="text-center mb-12">
-        <h1 class="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-tight">Rastreie sua Encomenda</h1>
-        <p class="text-gray-600 mt-2">Acompanhe seu envio em tempo real, de ponta a ponta.</p>
+        <h1 class="text-3xl md:text-4xl font-black text-gray-900 uppercase tracking-tight">Rastrear encomenda</h1>
+        <p class="text-gray-600 mt-2">Digite o código de rastreio e acompanhe postagem, trânsito e entrega.</p>
       </div>
       <div class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-2xl border border-gray-100">
         <form id="tracking-form" class="flex flex-col sm:flex-row gap-4">
@@ -425,6 +456,11 @@ ${header({ active: 'rastrear' })}
         </form>
         <div id="tracking-results" class="mt-8" role="status" aria-live="polite"></div>
       </div>
+      <article class="max-w-2xl mx-auto mt-12 space-y-4 text-gray-700 leading-relaxed">
+        <h2 class="text-2xl font-black text-gray-900 uppercase">Como rastrear um envio FreteQ</h2>
+        <p>O código de rastreio aparece na etiqueta e no painel, depois que o envio é confirmado. Cole o código acima para ver o status atual — pendente, postado, em trânsito, saiu para entrega ou entregue.</p>
+        <p>Ainda não enviou? <a href="${APP}/login" class="font-bold text-gray-900 underline underline-offset-2">Calcule o frete</a> e emita a etiqueta. Para despachar, use o <a href="/pontos-de-coleta/" class="font-bold text-gray-900 underline underline-offset-2">localizador de pontos de coleta</a>.</p>
+      </article>
     </div>
   </section>
 </main>
@@ -442,6 +478,7 @@ async function write404() {
     title: 'Página não encontrada | FreteQ',
     description: 'A página que você procura não existe. Volte para o site da FreteQ.',
     path: '/404.html',
+    robots: 'noindex,follow',
     jsonLd: [],
   })}
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
@@ -453,7 +490,7 @@ ${header()}
     <p class="text-gray-600 mb-8">O endereço pode ter mudado. Calcule seu frete ou volte para a página inicial.</p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
       <a href="/" class="bg-yellow-400 text-black font-bold px-6 py-3 rounded-xl">Ir para o início</a>
-      <a href="/calcular-frete/" class="bg-black text-white font-bold px-6 py-3 rounded-xl">Calcular frete</a>
+      <a href="${APP}/login" class="bg-black text-white font-bold px-6 py-3 rounded-xl">Calcular frete</a>
     </div>
   </div>
 </main>
@@ -465,7 +502,123 @@ ${footer()}
   console.log('404.html')
 }
 
+async function writePontos() {
+  await mkdir(join(PUBLIC, 'pontos-de-coleta'), { recursive: true })
+  const html = `${head({
+    title: 'Pontos de coleta Loggi e J&T | FreteQ',
+    description:
+      'Encontre o ponto de coleta mais perto do seu CEP. LoggiPonto e unidades J&T para despachar encomendas do e-commerce em todo o Brasil.',
+    path: '/pontos-de-coleta/',
+    jsonLd: [
+      breadcrumbLd([
+        { name: 'Início', url: '/' },
+        { name: 'Pontos de coleta', url: '/pontos-de-coleta/' },
+      ]),
+      organizationLd(),
+    ],
+  })}
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+${header({ active: 'pontos' })}
+<main class="flex-grow">
+  <section class="py-16 md:py-24 bg-yellow-400 text-black">
+    <div class="container mx-auto px-6">
+      <nav class="max-w-3xl mx-auto mb-6 text-sm text-black/70" aria-label="Breadcrumb">
+        <ol class="flex gap-2">
+          <li><a href="/" class="hover:underline">Início</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="font-medium">Pontos de coleta</li>
+        </ol>
+      </nav>
+      <div class="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+        <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 tracking-tight">Pontos de coleta</h1>
+        <p class="text-base md:text-xl font-medium">Informe o CEP e veja o LoggiPonto ou a unidade J&amp;T mais perto para despachar a encomenda depois de imprimir a etiqueta.</p>
+      </div>
+
+      <div class="max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-3xl shadow-2xl mb-8">
+        <form id="pontos-form" class="flex flex-col sm:flex-row gap-3 sm:items-end">
+          <div class="flex-1 w-full">
+            <label for="pontos-cep" class="block text-xs font-black text-gray-500 mb-2 uppercase tracking-widest">Seu CEP</label>
+            <input type="text" id="pontos-cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="Ex: 01310-100" maxlength="9" required class="w-full p-4 border-2 border-gray-100 rounded-xl focus:border-yellow-400 outline-none transition bg-gray-50 text-gray-900">
+          </div>
+          <button type="submit" id="pontos-submit" class="w-full sm:w-auto bg-black text-white px-8 py-4 rounded-xl font-black hover:bg-gray-800 transition shadow-xl text-lg">Buscar pontos</button>
+        </form>
+        <p class="text-sm text-gray-500 mt-3">Mostramos os pontos Loggi e J&amp;T mais próximos do CEP informado.</p>
+      </div>
+
+      <div id="pontos-results" class="pontos-grid max-w-4xl mx-auto">
+        <article class="bg-white/70 p-6 rounded-3xl border-2 border-dashed border-black/10 flex items-center justify-center text-center min-h-48">
+          <p class="text-gray-700 font-medium">Informe o CEP para ver os <strong>LoggiPontos</strong> mais perto de você.</p>
+        </article>
+        <article class="bg-white/70 p-6 rounded-3xl border-2 border-dashed border-black/10 flex items-center justify-center text-center min-h-48">
+          <p class="text-gray-700 font-medium">Informe o CEP para ver as unidades <strong>J&amp;T</strong> mais perto de você.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-white">
+    <div class="container mx-auto px-6 max-w-3xl space-y-6 text-gray-700 leading-relaxed">
+      <h2 class="text-2xl md:text-3xl font-black text-gray-900 uppercase">Como despachar no ponto</h2>
+      <p>A FreteQ não opera um hub próprio. Depois de <a href="${APP}/login" class="font-bold text-gray-900 underline underline-offset-2">calcular o frete</a> e emitir a etiqueta no painel, você leva o pacote no ponto oficial da transportadora escolhida.</p>
+      <ul class="list-disc pl-5 space-y-2">
+        <li><strong>Loggi:</strong> rede de LoggiPontos (comércios parceiros) em várias cidades.</li>
+        <li><strong>J&amp;T Express:</strong> unidades e pontos autorizados da própria J&amp;T.</li>
+        <li><strong>Latam Cargo:</strong> despacho conforme a orientação da cotação e do atendimento.</li>
+      </ul>
+      <p>Leve o pacote bem fechado, com a etiqueta visível. Guarde o comprovante e use o <a href="/rastreamento/" class="font-bold text-gray-900 underline underline-offset-2">rastreamento FreteQ</a> para acompanhar a entrega.</p>
+    </div>
+  </section>
+</main>
+${footer()}
+<script type="module" src="/js/main.js"></script>
+<script type="module" src="/js/pontos.js"></script>
+</body>
+</html>`
+  await writeFile(join(PUBLIC, 'pontos-de-coleta', 'index.html'), html)
+  console.log('pontos-de-coleta/index.html')
+}
+
+async function writeSitemap() {
+  const today = new Date().toISOString().slice(0, 10)
+  const urls = [
+    { loc: `${SITE}/`, changefreq: 'weekly', priority: '1.0' },
+    { loc: `${SITE}/calcular-frete/`, changefreq: 'weekly', priority: '0.9' },
+    { loc: `${SITE}/pontos-de-coleta/`, changefreq: 'weekly', priority: '0.8' },
+    { loc: `${SITE}/rastreamento/`, changefreq: 'weekly', priority: '0.8' },
+  ]
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls
+  .map(
+    (u) => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+    <priority>${u.priority}</priority>
+  </url>`,
+  )
+  .join('\n')}
+</urlset>
+`
+  await writeFile(join(PUBLIC, 'sitemap.xml'), xml)
+  console.log('sitemap.xml')
+}
+
+async function writeRobots() {
+  const txt = `User-agent: *
+Allow: /
+Disallow: /404.html
+
+Sitemap: ${SITE}/sitemap.xml
+`
+  await writeFile(join(PUBLIC, 'robots.txt'), txt)
+  console.log('robots.txt')
+}
+
 await writeIndex()
 await writeQuote()
 await writeTracking()
+await writePontos()
 await write404()
+await writeSitemap()
+await writeRobots()
